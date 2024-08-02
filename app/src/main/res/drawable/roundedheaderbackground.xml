@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:height="50dp">
+        <shape>
+            <solid android:color="@android:color/transparent" /> <!-- Use transparent or any color if needed -->
+        </shape>
+    </item>
+    <item android:top="-500dp" android:bottom="0dp" android:left="-100dp" android:right="-100dp">
+        <shape>
+            <corners android:radius="500dp" />
+            <bitmap
+                android:src="@drawable/r_watches_header"
+            android:gravity="center" />
+        </shape>
+    </item>
+</layer-list>
