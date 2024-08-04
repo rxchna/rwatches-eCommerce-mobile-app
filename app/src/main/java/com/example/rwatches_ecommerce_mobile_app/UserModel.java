@@ -20,8 +20,7 @@ public class UserModel implements Serializable {
     @ColumnInfo(name = "user_fullname")
     private String userFullName;
 
-    public UserModel(int userID, String userEmail, String userPassword, String userFullName) {
-        this.userID = userID;
+    public UserModel(String userEmail, String userPassword, String userFullName) {
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userFullName = userFullName;
