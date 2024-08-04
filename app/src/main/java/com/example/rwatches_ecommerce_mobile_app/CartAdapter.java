@@ -14,32 +14,31 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
     List<ProductModel> productsList;
 
-    public ProductAdapter(List<ProductModel> productsList) { this.productsList = productsList; }
+    public CartAdapter(List<ProductModel> productsList) { this.productsList = productsList; }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CartAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        return new MyViewHolder(layoutInflater, parent);
+        return new CartAdapter.MyViewHolder(layoutInflater, parent);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CartAdapter.MyViewHolder holder, int position) {
         ProductModel product = productsList.get(position);
 
         Context actContext = holder.itemView.getContext();
 
-        holder.productName.setText(product.getProductName());
-        holder.productPrice.setText(String.valueOf(product.getProductPrice()));
-        holder.productDescription.setText(product.getProductDescription());
+        holder.cartProductName.setText(product.getProductName());
+        holder.cartProductPrice.setText(String.valueOf(product.getProductPrice()));
 
         int resId = actContext.getResources().getIdentifier(product.getProductImageUrl(), "drawable", actContext.getPackageName());
-        holder.productImage.setImageResource(resId);
+        holder.cartProductImage.setImageResource(resId);
 
-        holder.productCardView.setOnClickListener(new View.OnClickListener() {
+        holder.cartProductCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Intent intent = new Intent(context, ProductDetailsScreen.class);
@@ -54,21 +53,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     public int getItemCount() { return productsList.size(); }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        Button btnAddToCart;
-        ImageView productImage;
-        TextView productDescription;
-        TextView productPrice;
-        TextView productName;
-        CardView productCardView;
+        Button btnRemoveProduct;
+        ImageView cartProductImage;
+        TextView cartProductPrice;
+        TextView cartProductName;
+        CardView cartProductCardView;
 
         public MyViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.product_card_view, parent, false));
-            productName = itemView.findViewById(R.id.productName);
-            productDescription = itemView.findViewById(R.id.productDescription);
-            productImage = itemView.findViewById(R.id.productImage);
-            productPrice = itemView.findViewById(R.id.productPrice);
-            productCardView = itemView.findViewById(R.id.productCardView);
-            btnAddToCart = itemView.findViewById(R.id.btnRemoveProduct);
+            super(inflater.inflate(R.layout.cart_product_view, parent, false));
+            cartProductName = itemView.findViewById(R.id.cartProductName);
+            cartProductImage = itemView.findViewById(R.id.cartProductImage);
+            cartProductPrice = itemView.findViewById(R.id.cartProductPrice);
+            cartProductCardView = itemView.findViewById(R.id.productCartCardView);
+            btnRemoveProduct = itemView.findViewById(R.id.btnRemoveProduct);
         }
     }
 }

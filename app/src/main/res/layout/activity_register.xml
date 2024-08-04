@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".RegisterActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -58,21 +59,29 @@
                     android:fontFamily="sans-serif"
                     android:text="Email address" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/emailRegisterInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:hint="Enter your email address"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:maxHeight="45dp"
-                    android:minHeight="48dp"
-                    android:padding="12dp"
-                    android:paddingTop="15dp"
-                    android:paddingEnd="15dp"
-                    android:singleLine="true"
-                    android:textSize="16sp" />
+                    android:layout_marginTop="10dp"
+                    app:hintEnabled="false">
+
+                    <EditText
+                        android:id="@+id/emailRegisterInputField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:hint="Enter your email address"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:maxHeight="45dp"
+                        android:minHeight="48dp"
+                        android:padding="12dp"
+                        android:paddingTop="15dp"
+                        android:paddingEnd="15dp"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/fullNameTitle"
@@ -82,31 +91,39 @@
                     android:fontFamily="sans-serif"
                     android:text="Full Name" />
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/fullNameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:hint="Enter your full name"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:maxHeight="45dp"
-                    android:minHeight="48dp"
-                    android:padding="12dp"
-                    android:paddingTop="15dp"
-                    android:paddingEnd="15dp"
-                    android:singleLine="true"
-                    android:textSize="16sp" />
+                    android:layout_marginTop="10dp"
+                    app:hintEnabled="false">
+
+                    <EditText
+                        android:id="@+id/fullNameInputField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:hint="Enter your full name"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:maxHeight="45dp"
+                        android:minHeight="48dp"
+                        android:padding="12dp"
+                        android:paddingTop="15dp"
+                        android:paddingEnd="15dp"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/passwordTitle"
+                    android:id="@+id/passwordRegisterTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:text="Password" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/passwordInput"
+                    android:id="@+id/passwordRegisterInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -114,7 +131,7 @@
                     app:hintEnabled="false">
 
                     <EditText
-                        android:id="@+id/passwordInputField"
+                        android:id="@+id/passwordRegisterInputField"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Enter password"

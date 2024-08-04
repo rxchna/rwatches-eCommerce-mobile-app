@@ -18,7 +18,7 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/productImage222"
+            android:id="@+id/cartProductImage"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -32,65 +32,61 @@
             android:layout_weight="3">
 
             <TextView
-                android:id="@+id/productName"
+                android:id="@+id/cartProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="start"
                 android:text="MVMT Rose Gold Watch"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/dollarText"
+                android:id="@+id/cartDollarText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="$"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/productName" />
+                app:layout_constraintTop_toBottomOf="@id/cartProductName" />
 
             <TextView
-                android:id="@+id/productPrice"
+                android:id="@+id/cartProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="10dp"
                 android:text="600.99"
-                android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@id/dollarText"
-                app:layout_constraintTop_toBottomOf="@id/productName" />
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@id/cartDollarText"
+                app:layout_constraintTop_toBottomOf="@id/cartProductName" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/productPrice">
+                app:layout_constraintTop_toBottomOf="@id/cartProductPrice"
+                tools:layout_editor_absoluteX="0dp">
 
                 <LinearLayout
-                    android:id="@+id/productQty"
+                    android:id="@+id/cartProductQty"
                     android:layout_width="120dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="45dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/border"
                     android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/btnDecrement"
+                    <ImageView
+                        android:id="@+id/ivDecrementIcon"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="#243A4B"
-                        android:padding="0dp"
-                        android:text="—"
-                        android:textColor="@android:color/white"
-                        android:textSize="20sp" />
+                        android:src="@drawable/decrement_icon" />
 
                     <TextView
                         android:id="@+id/cartProdQty"
@@ -99,31 +95,32 @@
                         android:layout_weight="1"
                         android:background="@color/white"
                         android:gravity="center"
-                        android:text="0"
-                        android:textSize="16sp" />
-
-                    <Button
-                        android:id="@+id/btnIncrement"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#243A4B"
-                        android:padding="0dp"
-                        android:text="+"
-                        android:textColor="@android:color/white"
+                        android:text="1"
                         android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/ivIncrementIcon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:src="@drawable/increment_icon" />
+
                 </LinearLayout>
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/btnRemoveProduct"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="25dp"
-                    android:backgroundTint="@color/black"
-                    android:padding="10dp"
-                    android:text="Remove"
-                    android:textColor="@android:color/white" />
+                <ImageView
+                    android:id="@+id/ivRemoveProduct"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/delete_icon" />
+
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
