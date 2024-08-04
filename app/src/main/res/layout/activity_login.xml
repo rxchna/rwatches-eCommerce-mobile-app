@@ -72,7 +72,6 @@
                         android:layout_marginTop="5dp"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
-                        android:maxHeight="45dp"
                         android:minHeight="48dp"
                         android:padding="12dp"
                         android:paddingTop="15dp"
@@ -123,7 +122,7 @@
                     android:padding="15dp"
                     android:text="Login"
                     android:textSize="18sp"
-                    app:backgroundTint="#243A4B" />
+                    app:backgroundTint="@color/black" />
 
                 <Button
                     android:id="@+id/btnRegister"
@@ -136,7 +135,7 @@
                     android:padding="15dp"
                     android:text="New User? Register here..."
                     android:textSize="18sp"
-                    app:backgroundTint="#4A423B" />
+                    app:backgroundTint="#31281F" />
 
             </LinearLayout>
         </LinearLayout>

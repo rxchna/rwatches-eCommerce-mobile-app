@@ -4,30 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/clProductView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    tools:context=".ProductDetailActivity">
 
-    <ImageView
-        android:id="@+id/ivBackIconProd"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="10dp"
+    <LinearLayout
+        android:id="@+id/llHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="60dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/back_icon"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/ivCartIconProd"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:src="@drawable/cart_icon"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/ivBackIconProd"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/back_icon"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/ivCartIconProd"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/cart_icon"
+            android:layout_marginEnd="20dp" />
+    </LinearLayout>
 
     <ScrollView
-        app:layout_constraintTop_toBottomOf="@id/ivBackIconProd"
+        app:layout_constraintTop_toBottomOf="@id/llHeader"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,15 +49,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/ivProductImage"
+            <LinearLayout
+                android:id="@+id/llProductImage"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:src="@drawable/rose_gold_watch" />
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivProductImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/rose_gold_watch" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvProductName"
@@ -58,9 +76,9 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-smallcaps"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="35dp"
                 android:layout_marginHorizontal="30dp"
-                app:layout_constraintTop_toBottomOf="@id/ivProductImage"
+                app:layout_constraintTop_toBottomOf="@id/llProductImage"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
@@ -68,7 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="start"
                 android:text="$"
@@ -82,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="start"
                 android:text="499.99"
@@ -96,7 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
-                android:layout_marginVertical="10dp"
+                android:layout_marginVertical="20dp"
                 android:ellipsize="end"
                 android:gravity="start"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet."
@@ -110,7 +128,7 @@
                 android:id="@+id/tvProdQuantityContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:orientation="horizontal"
                 android:paddingHorizontal="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -145,7 +163,7 @@
                         android:src="@drawable/decrement_icon" />
 
                     <TextView
-                        android:id="@+id/cartProdQty"
+                        android:id="@+id/tvCartProdQty"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

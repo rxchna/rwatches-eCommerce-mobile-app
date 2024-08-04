@@ -74,7 +74,6 @@
                         android:hint="Enter your email address"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
-                        android:maxHeight="45dp"
                         android:minHeight="48dp"
                         android:padding="12dp"
                         android:paddingTop="15dp"
@@ -106,7 +105,6 @@
                         android:hint="Enter your full name"
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
-                        android:maxHeight="45dp"
                         android:minHeight="48dp"
                         android:padding="12dp"
                         android:paddingTop="15dp"
@@ -179,12 +177,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="30dp"
-                    android:backgroundTint="@null"
+                    android:background="@null"
                     android:fontFamily="sans-serif-smallcaps"
                     android:padding="15dp"
                     android:text="Register"
                     android:textSize="18sp"
-                    app:backgroundTint="#243A4B" />
+                    app:backgroundTint="@color/black" />
 
             </LinearLayout>
         </LinearLayout>
