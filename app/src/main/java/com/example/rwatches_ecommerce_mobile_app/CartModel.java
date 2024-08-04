@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
  * Data Transfer Object (DTO) class to hold information about each user's products in their cart
  */
 @Entity(tableName = "cart")
-public class cartModel implements Serializable {
+public class CartModel implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
@@ -20,7 +20,7 @@ public class cartModel implements Serializable {
     @ColumnInfo(name = "product_qty")
     private int productQty;
 
-    public cartModel(int id, int userID, int productID, int productQty) {
+    public CartModel(int id, int userID, int productID, int productQty) {
         this.id = id;
         this.userID = userID;
         this.productID = productID;
