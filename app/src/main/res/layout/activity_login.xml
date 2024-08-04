@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".LoginActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -57,21 +58,29 @@
                     android:fontFamily="sans-serif"
                     android:text="Email address" />
 
-                <EditText
-                    android:id="@+id/fullNameInput"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/emailInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:imeOptions="actionNext"
-                    android:inputType="textEmailAddress"
-                    android:maxHeight="45dp"
-                    android:minHeight="48dp"
-                    android:padding="12dp"
-                    android:paddingTop="15dp"
-                    android:paddingEnd="15dp"
-                    android:singleLine="true"
-                    android:textSize="16sp"
-                    android:hint="Enter your email address" />
+                    android:layout_marginTop="10dp"
+                    app:hintEnabled="false">
+
+                    <EditText
+                        android:id="@+id/emailInputField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:imeOptions="actionNext"
+                        android:inputType="textEmailAddress"
+                        android:maxHeight="45dp"
+                        android:minHeight="48dp"
+                        android:padding="12dp"
+                        android:paddingTop="15dp"
+                        android:paddingEnd="15dp"
+                        android:singleLine="true"
+                        android:textSize="16sp"
+                        android:hint="Enter your email address" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/passwordTitle"

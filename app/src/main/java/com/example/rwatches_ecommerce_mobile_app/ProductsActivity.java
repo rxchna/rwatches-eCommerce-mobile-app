@@ -1,5 +1,6 @@
 package com.example.rwatches_ecommerce_mobile_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,9 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductsActivity extends AppCompatActivity{
+public class ProductsActivity extends AppCompatActivity {
     RecyclerView rvProductsList;
-    ImageView ivCartIcon, ivUserProfileIcon;
+    ImageView ivCartIcon;
+    ImageView ivUserProfileIcon;
     RecyclerView.LayoutManager layoutManager;
     List<ProductModel> productsList = new ArrayList<>();
     RecyclerView.Adapter productAdapter;
@@ -24,9 +26,13 @@ public class ProductsActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_products);
-        Log.d("ProductsActivity", "Layout set successfully.");
-        fetchControls();
+
+        rvProductsList = findViewById(R.id.productsList);
+        ivCartIcon  = findViewById(R.id.cartIcon);
+        ivUserProfileIcon  = findViewById(R.id.userProfileIcon);
+
         loadProducts();
+
         Log.d("ProductsActivity", "Products loaded size: " + productsList.size());
 
         layoutManager = new LinearLayoutManager(this);
@@ -38,8 +44,8 @@ public class ProductsActivity extends AppCompatActivity{
         ivCartIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), MyCartScreen.class);
-//                startActivity(intent);
+                Intent intentCart = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intentCart);
             }
         });
         ivUserProfileIcon.setOnClickListener(new View.OnClickListener() {
@@ -49,13 +55,6 @@ public class ProductsActivity extends AppCompatActivity{
 //                startActivity(intent);
             }
         });
-    }
-
-    void fetchControls()
-    {
-        rvProductsList = (RecyclerView) findViewById(R.id.productsList);
-        ivCartIcon  = (ImageView) findViewById(R.id.cartIcon);
-        ivUserProfileIcon  = (ImageView) findViewById(R.id.userProfileIcon);
     }
 
     public void loadProducts()
