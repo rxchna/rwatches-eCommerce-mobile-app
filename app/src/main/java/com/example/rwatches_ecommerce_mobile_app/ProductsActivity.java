@@ -59,10 +59,10 @@ public class ProductsActivity extends AppCompatActivity {
 
     public void loadProducts()
     {
-        productsList.add(new ProductModel("1", "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 600.99, 1));
-        productsList.add(new ProductModel("1", "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 601.99, 1));
-        productsList.add(new ProductModel("1", "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 602.99, 1));
-        productsList.add(new ProductModel("1", "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 603.99, 1));
-        productsList.add(new ProductModel("1", "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 604.99, 1));
+        productsList.add(new ProductModel(1, "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 600.99, 1));
+        productsList.add(new ProductModel(2, "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 601.99, 1));
+        productsList.add(new ProductModel(3, "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 602.99, 1));
+        productsList.add(new ProductModel(4, "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 603.99, 1));
+        productsList.add(new ProductModel(5, "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 604.99, 1));
     }
 }

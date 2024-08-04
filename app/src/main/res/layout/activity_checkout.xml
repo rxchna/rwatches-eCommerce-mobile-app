@@ -202,6 +202,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
+                    android:padding="5dp"
                     android:src="@drawable/visa_icon"
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackground" />
@@ -212,6 +213,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
+                    android:padding="3dp"
                     android:src="@drawable/mastercard_icon"
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackground" />
@@ -222,6 +224,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="15dp"
+                    android:padding="3dp"
                     android:src="@drawable/american_express_icon"
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackground" />
@@ -231,6 +234,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:padding="3dp"
                     android:src="@drawable/discover_icon"
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackground" />
