@@ -1,17 +1,32 @@
 package com.example.rwatches_ecommerce_mobile_app;
 
 import java.io.Serializable;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+/**
+ * Data Transfer Object (DTO) class to hold information about each product
+ */
+@Entity(tableName = "products")
 public class ProductModel implements Serializable {
 
-    private String productID;
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "product_id")
+    private int productID;
+    @ColumnInfo(name = "product_name")
     private String productName;
+    @ColumnInfo(name = "product_desc")
     private String productDescription;
+    @ColumnInfo(name = "product_image_url")
     private String productImageUrl;
+    @ColumnInfo(name = "product_price")
     private double productPrice;
+
+//    @ColumnInfo(name = "product_qty")
     private int productQty;
 
-    public ProductModel(String productID, String productName, String productDescription, String productImageUrl, double productPrice, int productQty) {
+    public ProductModel(int productID, String productName, String productDescription, String productImageUrl, double productPrice, int productQty) {
         this.productID = productID;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -20,10 +35,10 @@ public class ProductModel implements Serializable {
         this.productQty = productQty;
     }
 
-    public String getProductID() {
+    public int getProductID() {
         return productID;
     }
-    public void setProductID(String productID) {
+    public void setProductID(int productID) {
         this.productID = productID;
     }
 
@@ -56,6 +71,7 @@ public class ProductModel implements Serializable {
     public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
     }
+
     public int getProductQty() {
         return productQty;
     }

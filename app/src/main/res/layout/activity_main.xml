@@ -37,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="252dp"
-        android:backgroundTint="#243A4B"
+        android:backgroundTint="@color/black"
         android:fontFamily="sans-serif-smallcaps"
         android:padding="20dp"
         android:paddingStart="40dp"
