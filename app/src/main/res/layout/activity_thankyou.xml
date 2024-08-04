@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".ThankYouActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -36,9 +37,10 @@
                 android:transitionName="object_image" />
 
             <ImageView
-                android:layout_width="350dp"
-                android:layout_height="300dp"
+                android:layout_width="250dp"
+                android:layout_height="200dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="60dp"
                 android:src="@drawable/thank_you" />
 
             <TextView
@@ -63,7 +65,7 @@
                 android:padding="15dp"
                 android:text="Continue Browsing"
                 android:textSize="20sp"
-                app:backgroundTint="#243A4B" />
+                app:backgroundTint="@color/black" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

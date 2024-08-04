@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +20,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView rvCartProductsList;
     ImageView ivHomeIcon;
     ImageView ivUserProfileIcon;
+    Button btnCheckout;
     RecyclerView.LayoutManager layoutManager;
     List<ProductModel> cartProductsList = new ArrayList<>();
     RecyclerView.Adapter cartAdapter;
@@ -32,6 +34,7 @@ public class CartActivity extends AppCompatActivity {
         rvCartProductsList = findViewById(R.id.rvCartProductsList);
         ivHomeIcon  = findViewById(R.id.homeIcon);
         ivUserProfileIcon  = findViewById(R.id.userProfileIcon2);
+        btnCheckout = findViewById(R.id.btnCheckout);
 
         loadProducts();
 
@@ -53,8 +56,16 @@ public class CartActivity extends AppCompatActivity {
         ivUserProfileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), MyProfileScreen.class);
-//                startActivity(intent);
+//                Intent intentUserProfile = new Intent(getApplicationContext(), MyProfileScreen.class);
+//                startActivity(intentUserProfile); todo
+            }
+        });
+
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentCheckout = new Intent(getApplicationContext(), CheckoutActivity.class);
+                startActivity(intentCheckout);
             }
         });
     }

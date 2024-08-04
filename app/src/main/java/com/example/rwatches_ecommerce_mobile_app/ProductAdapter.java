@@ -1,6 +1,7 @@
 package com.example.rwatches_ecommerce_mobile_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,10 +43,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.productCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(context, ProductDetailsScreen.class);
-//                intent.putExtra("selectedIndex", shoppingModelList.get(holder.getAdapterPosition()));
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(intent); todo
+                Intent intent = new Intent(actContext.getApplicationContext(), ProductDetailActivity.class);
+                intent.putExtra("selectedIndex", productsList.get(holder.getAdapterPosition()));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                actContext.startActivity(intent);
             }
         });
     }
