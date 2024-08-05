@@ -8,9 +8,6 @@
     <item android:top="-500dp" android:bottom="0dp" android:left="-100dp" android:right="-100dp">
         <shape>
             <corners android:radius="500dp" />
-            <bitmap
-                android:src="@drawable/r_watches_header"
-            android:gravity="center" />
         </shape>
     </item>
 </layer-list>

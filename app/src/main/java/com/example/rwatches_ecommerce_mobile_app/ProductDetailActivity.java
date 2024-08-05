@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
@@ -29,13 +30,24 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     ImageView ivIncrementIcon;
     Button btnAddProductToCart;
     ProductModel productModel;
+    AppDatabase appDatabase;
     int prodQty = 0;
+    int curr_userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_product_details);
+
+        appDatabase = AppDatabase.getInstance(this);
+
+        // Retrieve user_id from the Intent
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("user_id")) {
+            curr_userID = intent.getIntExtra("user_id", -1);
+        }
+
         ivBackIconProd = findViewById(R.id.ivBackIconProd);
         ivCartIconProd = findViewById(R.id.ivCartIconProd);
         ivProductImage = findViewById(R.id.ivProductImage);
@@ -82,6 +94,18 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             prodQty++;
             setValuesInCartCount();
         }
+        else if (view.getId() == R.id.btnAddProductToCart) {
+            addProductToCart();
+        }
+    }
+
+    void addProductToCart() {
+        CartModel cartItem = new CartModel(curr_userID, productModel.getProductID(), prodQty);
+//        new Thread(() -> appDatabase.cartDao().insertUserCartProduct(cartItem)).start(); // TODO
+        appDatabase.cartDao().insertUserCartProduct(cartItem);
+
+        // Show Toast message
+        Toast.makeText(this, "Product added to cart!", Toast.LENGTH_SHORT).show();
     }
 
     void setValuesInCartCount() {

@@ -22,7 +22,8 @@ public class CartActivity extends AppCompatActivity {
     ImageView ivUserProfileIcon;
     Button btnCheckout;
     RecyclerView.LayoutManager layoutManager;
-    List<ProductModel> cartProductsList = new ArrayList<>();
+    List<ProductModel> productsList = new ArrayList<>();
+    List<CartModel> cartProductsList = new ArrayList<>();
     RecyclerView.Adapter cartAdapter;
 
     @Override
@@ -38,12 +39,12 @@ public class CartActivity extends AppCompatActivity {
 
         loadProducts();
 
-        Log.d("ProductsActivity", "Products loaded size: " + cartProductsList.size());
+        Log.d("ProductsActivity", "Products loaded size: " + productsList.size());
 
         layoutManager = new LinearLayoutManager(this);
         rvCartProductsList.setLayoutManager(layoutManager);
 
-        cartAdapter = new CartAdapter(cartProductsList);
+        cartAdapter = new CartAdapter(productsList, cartProductsList);
         rvCartProductsList.setAdapter(cartAdapter);
 
         ivHomeIcon.setOnClickListener(new View.OnClickListener() {
@@ -72,10 +73,11 @@ public class CartActivity extends AppCompatActivity {
 
     public void loadProducts()
     {
-        cartProductsList.add(new ProductModel(1, "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 600.99, 1));
-        cartProductsList.add(new ProductModel(2, "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 601.99, 1));
-        cartProductsList.add(new ProductModel(3, "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 602.99, 1));
-        cartProductsList.add(new ProductModel(4, "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 603.99, 1));
-        cartProductsList.add(new ProductModel(5, "MVMT Rose Gold Watch", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 604.99, 1));
+        productsList.add(new ProductModel(1, "MVMT Rose Gold Watch1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 600.99));
+        productsList.add(new ProductModel(4, "MVMT Rose Gold Watch2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 603.99));
+        productsList.add(new ProductModel(5, "MVMT Rose Gold Watch3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis faucibus elit at mi porttitor laoreet.", "rose_gold_watch", 604.99));
+
+        cartProductsList.add(new CartModel(1,1, 3));
+        cartProductsList.add(new CartModel(1,4, 2));
     }
 }

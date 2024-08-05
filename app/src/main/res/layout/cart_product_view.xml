@@ -35,11 +35,11 @@
                 android:id="@+id/cartProductName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="0dp"
                 android:fontFamily="sans-serif-smallcaps"
                 android:gravity="start"
                 android:text="MVMT Rose Gold Watch"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="$"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cartProductName" />
 
@@ -61,7 +61,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="10dp"
                 android:text="600.99"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toEndOf="@id/cartDollarText"
                 app:layout_constraintTop_toBottomOf="@id/cartProductName" />
 
@@ -76,7 +76,7 @@
                 <LinearLayout
                     android:id="@+id/cartProductQty"
                     android:layout_width="120dp"
-                    android:layout_height="45dp"
+                    android:layout_height="42dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/border"
                     android:orientation="horizontal">
@@ -96,7 +96,7 @@
                         android:background="@color/white"
                         android:gravity="center"
                         android:text="1"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <ImageView
                         android:id="@+id/ivIncrementIcon"

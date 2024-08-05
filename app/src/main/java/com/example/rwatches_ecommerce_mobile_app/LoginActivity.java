@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Successful login
                 Intent intentProducts = new Intent(getApplicationContext(), ProductsActivity.class);
+                intentProducts.putExtra("user_id", user.getUserID());
                 startActivity(intentProducts);
                 finish();
             }

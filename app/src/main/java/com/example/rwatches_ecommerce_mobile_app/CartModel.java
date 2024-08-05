@@ -20,8 +20,7 @@ public class CartModel implements Serializable {
     @ColumnInfo(name = "product_qty")
     private int productQty;
 
-    public CartModel(int id, int userID, int productID, int productQty) {
-        this.id = id;
+    public CartModel(int userID, int productID, int productQty) {
         this.userID = userID;
         this.productID = productID;
         this.productQty = productQty;
