@@ -13,12 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
     List<ProductModel> productsList;
+    List<CartModel> cartProductsList;
 
-    public CartAdapter(List<ProductModel> productsList) { this.productsList = productsList; }
+    public CartAdapter(List<ProductModel> productsList, List<CartModel> cartProductsList) {
+        this.productsList = productsList;
+        this.cartProductsList = cartProductsList;
+    }
 
     @NonNull
     @Override
@@ -29,54 +34,72 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull CartAdapter.MyViewHolder holder, int position) {
-        ProductModel productModel = productsList.get(position);
-
         Context actContext = holder.itemView.getContext();
+        CartModel cartProductModel = cartProductsList.get(position); // Product in cart
+        ProductModel productModel = getProductById(cartProductModel.getProductID()); // Retrieve product details from product table
 
-        holder.cartProductName.setText(productModel.getProductName());
-        holder.cartProductPrice.setText(String.valueOf(productModel.getProductPrice()));
+        if (productModel != null) {
+            holder.cartProductName.setText(productModel.getProductName());
 
-        int resId = actContext.getResources().getIdentifier(productModel.getProductImageUrl(), "drawable", actContext.getPackageName());
-        holder.cartProductImage.setImageResource(resId);
+            DecimalFormat df = new DecimalFormat("#.00");
+            String fProductPrice = df.format(productModel.getProductPrice());
+            holder.cartProductPrice.setText(fProductPrice);
 
-        holder.cartProductCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(actContext.getApplicationContext(), ProductDetailActivity.class);
-                intent.putExtra("selectedIndex", productsList.get(holder.getAdapterPosition()));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                actContext.startActivity(intent);
-            }
-        });
+            int resId = actContext.getResources().getIdentifier(productModel.getProductImageUrl(), "drawable", actContext.getPackageName());
+            holder.cartProductImage.setImageResource(resId);
 
-        holder.ivIncrementIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int newQuantity = productModel.getProductQty() + 1;
-                productModel.setProductQty(newQuantity);
-                holder.cartProdQty.setText(String.valueOf(newQuantity));
-                // todo: update total and subtotal
-            }
-        });
+            holder.cartProdQty.setText(String.valueOf(cartProductModel.getProductQty()));
 
-        holder.ivDecrementIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (productModel.getProductQty() > 1) {
-                    int newQuantity = productModel.getProductQty() - 1;
-                    productModel.setProductQty(newQuantity);
+            holder.cartProductCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(actContext.getApplicationContext(), ProductDetailActivity.class);
+                    intent.putExtra("selectedIndex", productsList.get(holder.getAdapterPosition()));
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    actContext.startActivity(intent);
+                }
+            });
+
+            holder.ivIncrementIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int newQuantity = cartProductModel.getProductQty() + 1;
+                    cartProductModel.setProductQty(newQuantity);
                     holder.cartProdQty.setText(String.valueOf(newQuantity));
                     // todo: update total and subtotal
                 }
+            });
+
+            holder.ivDecrementIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (cartProductModel.getProductQty() > 1) {
+                        int newQuantity = cartProductModel.getProductQty() - 1;
+                        cartProductModel.setProductQty(newQuantity);
+                        holder.cartProdQty.setText(String.valueOf(newQuantity));
+                        // todo: update total and subtotal
+                    }
+                }
+            });
+        }
+    }
+
+    // Temp method to return product in productsList by ID
+    private ProductModel getProductById(int productID) {
+        // Return the ProductModel corresponding to the productID
+        for (ProductModel product : productsList) {
+            if (product.getProductID() == productID) {
+                return product;
             }
-        });
+        }
+        return null;
     }
 
     @Override
-    public int getItemCount() { return productsList.size(); }
+    public int getItemCount() { return cartProductsList.size(); }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        Button btnRemoveProduct;
+        ImageView ivRemoveProduct;
         ImageView cartProductImage;
         TextView cartProductPrice;
         TextView cartProductName;
@@ -91,7 +114,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             cartProductImage = itemView.findViewById(R.id.cartProductImage);
             cartProductPrice = itemView.findViewById(R.id.cartProductPrice);
             cartProductCardView = itemView.findViewById(R.id.productCartCardView);
-            btnRemoveProduct = itemView.findViewById(R.id.btnRemoveProduct);
+            ivRemoveProduct = itemView.findViewById(R.id.ivRemoveProduct);
             ivIncrementIcon = itemView.findViewById(R.id.ivIncrementIcon);
             ivDecrementIcon = itemView.findViewById(R.id.ivDecrementIcon);
             cartProdQty = itemView.findViewById(R.id.cartProdQty);

@@ -23,16 +23,12 @@ public class ProductModel implements Serializable {
     @ColumnInfo(name = "product_price")
     private double productPrice;
 
-//    @ColumnInfo(name = "product_qty")
-    private int productQty;
-
-    public ProductModel(int productID, String productName, String productDescription, String productImageUrl, double productPrice, int productQty) {
+    public ProductModel(int productID, String productName, String productDescription, String productImageUrl, double productPrice) {
         this.productID = productID;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productImageUrl = productImageUrl;
         this.productPrice = productPrice;
-        this.productQty = productQty;
     }
 
     public int getProductID() {
@@ -70,12 +66,5 @@ public class ProductModel implements Serializable {
 
     public void setProductPrice(double productPrice) {
         this.productPrice = productPrice;
-    }
-
-    public int getProductQty() {
-        return productQty;
-    }
-    public void setProductQty(int productQty) {
-        this.productQty = productQty;
     }
 }

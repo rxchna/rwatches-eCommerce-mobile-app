@@ -8,17 +8,28 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
     List<ProductModel> productsList;
+    AppDatabase appDatabase;
+    private Context context;
+    int curr_userID;
 
-    public ProductAdapter(List<ProductModel> productsList) { this.productsList = productsList; }
+    public ProductAdapter(Context context, List<ProductModel> productsList, AppDatabase appDatabase, int curr_userID)
+    {
+        this.context = context;
+        this.productsList = productsList;
+        this.appDatabase = appDatabase;
+        this.curr_userID = curr_userID;
+    }
 
     @NonNull
     @Override
@@ -34,8 +45,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         Context actContext = holder.itemView.getContext();
 
         holder.productName.setText(product.getProductName());
-        holder.productPrice.setText(String.valueOf(product.getProductPrice()));
         holder.productDescription.setText(product.getProductDescription());
+
+        DecimalFormat df = new DecimalFormat("#.00");
+        String fProductPrice = df.format(product.getProductPrice());
+        holder.productPrice.setText(fProductPrice);
 
         int resId = actContext.getResources().getIdentifier(product.getProductImageUrl(), "drawable", actContext.getPackageName());
         holder.productImage.setImageResource(resId);
@@ -43,12 +57,30 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         holder.productCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(actContext.getApplicationContext(), ProductDetailActivity.class);
-                intent.putExtra("selectedIndex", productsList.get(holder.getAdapterPosition()));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                actContext.startActivity(intent);
+                Intent intentProductDetail = new Intent(actContext.getApplicationContext(), ProductDetailActivity.class);
+                intentProductDetail.putExtra("selectedIndex", productsList.get(holder.getAdapterPosition()));
+                intentProductDetail.putExtra("user_id", curr_userID);
+                intentProductDetail.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                actContext.startActivity(intentProductDetail);
             }
         });
+
+        holder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Add product to cart
+                addProductToCart(product);
+            }
+        });
+    }
+
+    private void addProductToCart(ProductModel product) {
+        CartModel cartItem = new CartModel(curr_userID, product.getProductID(), 1); // Default quantity to 1
+//        new Thread(() -> appDatabase.cartDao().insertUserCartProduct(cartItem)).start(); // TODO
+        appDatabase.cartDao().insertUserCartProduct(cartItem);
+
+        // Show Toast message
+        Toast.makeText(context, "Product added to cart!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -69,7 +101,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             productImage = itemView.findViewById(R.id.productImage);
             productPrice = itemView.findViewById(R.id.productPrice);
             productCardView = itemView.findViewById(R.id.productCardView);
-            btnAddToCart = itemView.findViewById(R.id.btnRemoveProduct);
+            btnAddToCart = itemView.findViewById(R.id.btnAddProductToCart);
         }
     }
 }
