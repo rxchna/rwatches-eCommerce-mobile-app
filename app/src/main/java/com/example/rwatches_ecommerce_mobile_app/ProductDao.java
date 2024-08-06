@@ -29,4 +29,7 @@ public interface ProductDao {
     @Query("SELECT COUNT(*) FROM products")
     int getProductsCount();
 
+    @Query("SELECT * FROM products WHERE product_id IN (:productIDs)")
+    List<ProductModel> getProductsByIds(List<Integer> productIDs);
+
 }

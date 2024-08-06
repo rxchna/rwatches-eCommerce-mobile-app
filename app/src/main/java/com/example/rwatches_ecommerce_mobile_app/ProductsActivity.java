@@ -22,7 +22,7 @@ public class ProductsActivity extends AppCompatActivity {
     List<ProductModel> productsList = new ArrayList<>();
     RecyclerView.Adapter productAdapter;
     AppDatabase appDatabase;
-    int userID;
+    int curr_userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class ProductsActivity extends AppCompatActivity {
         // Retrieve user_id from the Intent
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra("user_id")) {
-            userID = intent.getIntExtra("user_id", -1);
+            curr_userID = intent.getIntExtra("user_id", -1);
         }
 
         rvProductsList = findViewById(R.id.productsList);
@@ -53,13 +53,14 @@ public class ProductsActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         rvProductsList.setLayoutManager(layoutManager);
 
-        productAdapter = new ProductAdapter(this, productsList, appDatabase, userID);
+        productAdapter = new ProductAdapter(productsList, appDatabase, curr_userID);
         rvProductsList.setAdapter(productAdapter);
 
         ivCartIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intentCart = new Intent(getApplicationContext(), CartActivity.class);
+                intentCart.putExtra("user_id", curr_userID);
                 startActivity(intentCart);
             }
         });
@@ -67,6 +68,7 @@ public class ProductsActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 //                Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
+//                intentCart.putExtra("user_id", curr_userID);
 //                startActivity(intent);
             }
         });

@@ -20,12 +20,10 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
     List<ProductModel> productsList;
     AppDatabase appDatabase;
-    private Context context;
     int curr_userID;
 
-    public ProductAdapter(Context context, List<ProductModel> productsList, AppDatabase appDatabase, int curr_userID)
+    public ProductAdapter(List<ProductModel> productsList, AppDatabase appDatabase, int curr_userID)
     {
-        this.context = context;
         this.productsList = productsList;
         this.appDatabase = appDatabase;
         this.curr_userID = curr_userID;
@@ -69,18 +67,30 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             @Override
             public void onClick(View view) {
                 // Add product to cart
-                addProductToCart(product);
+                addProductToCart(actContext, product);
             }
         });
     }
 
-    private void addProductToCart(ProductModel product) {
-        CartModel cartItem = new CartModel(curr_userID, product.getProductID(), 1); // Default quantity to 1
+    private void addProductToCart(Context actContext, ProductModel product) {
+        // Check if product has already been added to user's cart
+        CartModel existingCartItem = appDatabase.cartDao().getCartProduct(curr_userID, product.getProductID());
+
+        if (existingCartItem == null) {
+            // Add new product to cart
+            CartModel cartItem = new CartModel(curr_userID, product.getProductID(), 1); // Default quantity to 1
 //        new Thread(() -> appDatabase.cartDao().insertUserCartProduct(cartItem)).start(); // TODO
-        appDatabase.cartDao().insertUserCartProduct(cartItem);
+            appDatabase.cartDao().insertUserCartProduct(cartItem);
+        }
+        else {
+            // Update existing cart product's quantity
+            int updatedQuantity = existingCartItem.getProductQty() + 1;
+            existingCartItem.setProductQty(updatedQuantity);
+            appDatabase.cartDao().updateUserCartProduct(existingCartItem);
+        }
 
         // Show Toast message
-        Toast.makeText(context, "Product added to cart!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(actContext, "Product added to cart!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
