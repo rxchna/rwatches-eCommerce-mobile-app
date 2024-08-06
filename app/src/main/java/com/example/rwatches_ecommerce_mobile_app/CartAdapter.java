@@ -19,10 +19,19 @@ import java.util.List;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
     List<ProductModel> productsList;
     List<CartModel> cartProductsList;
+    AppDatabase appDatabase;
+    private Context context;
+    int curr_userID;
+    CartActivity cartActivity;
+    TextView tvTotalValue;
+    TextView tvSubtotalValue;
 
-    public CartAdapter(List<ProductModel> productsList, List<CartModel> cartProductsList) {
+    public CartAdapter(List<ProductModel> productsList, List<CartModel> cartProductsList, AppDatabase appDatabase, int curr_userID, CartActivity cartActivity) {
         this.productsList = productsList;
         this.cartProductsList = cartProductsList;
+        this.appDatabase = appDatabase;
+        this.curr_userID = curr_userID;
+        this.cartActivity = cartActivity;
     }
 
     @NonNull
@@ -55,6 +64,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 public void onClick(View view) {
                     Intent intent = new Intent(actContext.getApplicationContext(), ProductDetailActivity.class);
                     intent.putExtra("selectedIndex", productsList.get(holder.getAdapterPosition()));
+                    intent.putExtra("user_id", curr_userID);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     actContext.startActivity(intent);
                 }
@@ -63,10 +73,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             holder.ivIncrementIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int newQuantity = cartProductModel.getProductQty() + 1;
-                    cartProductModel.setProductQty(newQuantity);
-                    holder.cartProdQty.setText(String.valueOf(newQuantity));
-                    // todo: update total and subtotal
+                    int updatedQuantity = cartProductModel.getProductQty() + 1;
+
+                    // Update new quantity
+                    updateCartProductQty(cartProductModel, holder.cartProdQty, updatedQuantity);
                 }
             });
 
@@ -74,17 +84,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 @Override
                 public void onClick(View view) {
                     if (cartProductModel.getProductQty() > 1) {
-                        int newQuantity = cartProductModel.getProductQty() - 1;
-                        cartProductModel.setProductQty(newQuantity);
-                        holder.cartProdQty.setText(String.valueOf(newQuantity));
-                        // todo: update total and subtotal
+                        int updatedQuantity = cartProductModel.getProductQty() - 1;
+
+                        // Update new quantity
+                        updateCartProductQty(cartProductModel, holder.cartProdQty, updatedQuantity);
                     }
+                }
+            });
+
+            holder.ivRemoveProduct.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Remove item from cart
+                    removeCartItem(cartProductModel, holder.getAdapterPosition());
                 }
             });
         }
     }
 
-    // Temp method to return product in productsList by ID
+    // Return each product detail in productsList by ID
     private ProductModel getProductById(int productID) {
         // Return the ProductModel corresponding to the productID
         for (ProductModel product : productsList) {
@@ -93,6 +111,33 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             }
         }
         return null;
+    }
+
+    // Update quantity of cart product
+    private void updateCartProductQty(CartModel cartProductModel, TextView cartProdQty, int updatedQty){
+        // Update Quantity on Card view
+        cartProductModel.setProductQty(updatedQty);
+        cartProdQty.setText(String.valueOf(updatedQty));
+
+        // Update total price on cartActivity
+        cartActivity.updateTotalPrice();
+
+        // Update the quantity in the database
+        appDatabase.cartDao().updateUserCartProduct(cartProductModel);
+    }
+
+    private void removeCartItem (CartModel cartProductModel, int position) {
+        // Remove item from the list
+        cartProductsList.remove(position);
+
+        // Notify adapter about item removal
+        notifyItemRemoved(position);
+
+        // Update total price on cartActivity
+        cartActivity.updateTotalPrice();
+
+        // Remove the item from the database
+        appDatabase.cartDao().deleteUserCartProduct(cartProductModel);
     }
 
     @Override

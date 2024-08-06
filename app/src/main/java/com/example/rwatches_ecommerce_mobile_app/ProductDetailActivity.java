@@ -68,7 +68,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         Intent i = getIntent();
         productModel = (ProductModel) i.getSerializableExtra("selectedIndex");
         tvProductName.setText(productModel.getProductName());
-        tvProductPrice.setText(String.valueOf(productModel.getProductPrice()));
+        tvProductPrice.setText(String.format("%.2f", productModel.getProductPrice()));
         tvProdDescription.setText(productModel.getProductDescription());
         prodQty = Integer.parseInt(tvCartProdQty.getText().toString());
         int resid = getApplicationContext().getResources().getIdentifier(productModel.getProductImageUrl(), "drawable", getApplicationContext().getPackageName());
@@ -81,18 +81,19 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
             finish();
         } 
         else if (view.getId() == R.id.ivCartIconProd) {
-            Intent intent = new Intent(getApplicationContext(), CartActivity.class);
-            startActivity(intent);
+            Intent intentCart = new Intent(getApplicationContext(), CartActivity.class);
+            intentCart.putExtra("user_id", curr_userID);
+            startActivity(intentCart);
         } 
         else if (view.getId() == R.id.ivDecrementIcon) {
             if (prodQty >= 1) {
                 prodQty--;
-                setValuesInCartCount();
+                tvCartProdQty.setText(String.valueOf(prodQty));
             }
         } 
         else if (view.getId() == R.id.ivIncrementIcon) {
             prodQty++;
-            setValuesInCartCount();
+            tvCartProdQty.setText(String.valueOf(prodQty));
         }
         else if (view.getId() == R.id.btnAddProductToCart) {
             addProductToCart();
@@ -100,17 +101,23 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     }
 
     void addProductToCart() {
-        CartModel cartItem = new CartModel(curr_userID, productModel.getProductID(), prodQty);
+        // Check if product has already been added to user's cart
+        CartModel existingCartItem = appDatabase.cartDao().getCartProduct(curr_userID, productModel.getProductID());
+
+        if (existingCartItem == null) {
+            // Add new product to cart
+            CartModel cartItem = new CartModel(curr_userID, productModel.getProductID(), prodQty);
 //        new Thread(() -> appDatabase.cartDao().insertUserCartProduct(cartItem)).start(); // TODO
-        appDatabase.cartDao().insertUserCartProduct(cartItem);
+            appDatabase.cartDao().insertUserCartProduct(cartItem);
+        }
+        else {
+            // Update existing cart product's quantity
+            int updatedQuantity = existingCartItem.getProductQty() + prodQty;
+            existingCartItem.setProductQty(updatedQuantity);
+            appDatabase.cartDao().updateUserCartProduct(existingCartItem);
+        }
 
         // Show Toast message
         Toast.makeText(this, "Product added to cart!", Toast.LENGTH_SHORT).show();
-    }
-
-    void setValuesInCartCount() {
-        tvCartProdQty.setText(String.valueOf(prodQty));
-        double price = Double.valueOf(String.valueOf(tvProductPrice.getText()));
-        double finalPrice = price * prodQty;
     }
 }

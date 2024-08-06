@@ -10,8 +10,11 @@ import java.util.List;
 
 @Dao
 public interface CartDao {
-    @Query("SELECT * from cart where user_id = :user_id")
-    List<CartModel> geUserCartList(int user_id);
+    @Query("SELECT * FROM cart WHERE user_id = :user_id")
+    List<CartModel> getUserCartList(int user_id);
+
+    @Query("SELECT * FROM cart WHERE user_id = :user_id AND product_id = :product_id")
+    CartModel getCartProduct(int user_id, int product_id);
 
     @Insert
     void insertUserCartProduct(CartModel userCartProduct);
@@ -21,4 +24,7 @@ public interface CartDao {
 
     @Delete
     void deleteUserCartProduct(CartModel userCartProduct);
+
+    @Query("DELETE FROM cart WHERE user_id = :userId")
+    void clearUserCart(int userId);
 }

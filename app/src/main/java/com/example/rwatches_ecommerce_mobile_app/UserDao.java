@@ -12,6 +12,9 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE user_email = :userEmail")
     UserModel getUser(String userEmail);
 
+    @Query("SELECT * FROM users WHERE user_id = :userID")
+    UserModel getUserById(int userID);
+
     @Query("SELECT * FROM users WHERE user_email = :userEmail AND user_password = :userPassword")
     UserModel getUserByEmailAndPassword(String userEmail, String userPassword);
 }
