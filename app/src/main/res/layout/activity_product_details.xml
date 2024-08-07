@@ -29,11 +29,18 @@
             android:layout_weight="1" />
 
         <ImageView
+            android:id="@+id/ivHomeIconProd"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/prod_home_icon"
+            android:layout_marginEnd="15dp" />
+
+        <ImageView
             android:id="@+id/ivCartIconProd"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:src="@drawable/cart_icon"
-            android:layout_marginEnd="20dp" />
+            android:layout_marginEnd="15dp" />
     </LinearLayout>
 
     <ScrollView
@@ -190,9 +197,11 @@
                 android:layout_marginHorizontal="40dp"
                 android:layout_marginTop="30dp"
                 android:backgroundTint="@color/black"
+                android:fontFamily="sans-serif-smallcaps"
                 android:padding="25dp"
                 android:text="Add to Cart"
                 android:textColor="@android:color/white"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

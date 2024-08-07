@@ -1,6 +1,7 @@
 package com.example.rwatches_ecommerce_mobile_app;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +32,6 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView.Adapter cartAdapter;
     AppDatabase appDatabase;
     int curr_userID;
-
     double taxFee = 10.95;
 
     @Override
@@ -53,7 +53,6 @@ public class CartActivity extends AppCompatActivity {
         ivUserProfileIcon  = findViewById(R.id.userProfileIcon2);
         btnCheckout = findViewById(R.id.btnCheckout);
         tvTaxValue = findViewById(R.id.tvTaxValue);
-        tvTaxValue.setText(String.format("%.2f", taxFee));
 
         // Get products from user cart and their product details
         getUserCartProducts(appDatabase, curr_userID);
@@ -107,14 +106,42 @@ public class CartActivity extends AppCompatActivity {
             // Retrieve product details
             productsList = appDatabase.productDao().getProductsByIds(productIds);
 
-            // Calculate total and subtotal
-            updateTotalPrice();
+            // Calculate total/subtotal and update UI
+            updateCartTotal();
+        }
+        else {
+            // Disable checkout button if no products are added to cart
+            disableCheckoutBtn(btnCheckout);
         }
     }
 
-    void updateTotalPrice() {
+    void updateCartTotal() {
         double total = 0;
-        double tax_fee = 10.95;
+
+        if (!cartProductsList.isEmpty()) {
+            // Add fixed tax value is cart contains products
+            taxFee = 10.95;
+            // Calculate cart total
+            total = calculateCartTotal();
+
+            // Update Cart UI total/tax elements
+            setCartTotal(total);
+        }
+        else {
+            taxFee = 0;
+            // Update Cart UI total/tax elements
+            setCartTotal(0);
+
+            // Disable checkout button if no products are added to cart
+            btnCheckout = findViewById(R.id.btnCheckout);
+            disableCheckoutBtn(btnCheckout);
+        }
+    }
+
+    double calculateCartTotal() {
+        double total = 0;
+
+        // Calculate total price of cart items
         for (CartModel cartItem : cartProductsList) {
             // Find the corresponding product
             for (ProductModel product : productsList) {
@@ -124,11 +151,23 @@ public class CartActivity extends AppCompatActivity {
                 }
             }
         }
+        return total;
+    }
 
+    void setCartTotal(double total) {
         // Update Total and Subtotal elements
         tvTotalValue = findViewById(R.id.tvTotalValue);
         tvSubtotalValue = findViewById(R.id.tvSubtotalValue);
         tvTotalValue.setText(String.format("%.2f", total));
+        tvTaxValue.setText(String.format("%.2f", taxFee));
         tvSubtotalValue.setText(String.format("%.2f", total + taxFee));
+    }
+
+    void disableCheckoutBtn(Button btnCheckout) {
+        // Disable checkout button
+        btnCheckout.setEnabled(false);
+        btnCheckout.setBackgroundColor(Color.GRAY);
+        btnCheckout.setTextColor(Color.DKGRAY);
+
     }
 }

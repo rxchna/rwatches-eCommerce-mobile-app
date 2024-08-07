@@ -123,6 +123,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="sans-serif-smallcaps"
+                android:text="Email Address"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailAddressCheckout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:hintEnabled="false">
+
+                <EditText
+                    android:id="@+id/etEmailAddressCheckout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:hint="Enter email address"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:padding="12dp"
+                    android:paddingTop="15dp"
+                    android:paddingEnd="15dp"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-smallcaps"
                 android:text="Mailing Address"
                 android:textSize="16sp" />
 
@@ -239,8 +270,6 @@
                     android:scaleType="centerCrop"
                     android:background="?attr/selectableItemBackground" />
             </RadioGroup>
-
-
 
             <LinearLayout
                 android:id="@+id/llCreditCardDetails"

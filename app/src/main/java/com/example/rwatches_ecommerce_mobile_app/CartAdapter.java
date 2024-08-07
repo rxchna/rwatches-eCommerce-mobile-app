@@ -120,7 +120,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         cartProdQty.setText(String.valueOf(updatedQty));
 
         // Update total price on cartActivity
-        cartActivity.updateTotalPrice();
+        cartActivity.updateCartTotal();
 
         // Update the quantity in the database
         appDatabase.cartDao().updateUserCartProduct(cartProductModel);
@@ -134,7 +134,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         notifyItemRemoved(position);
 
         // Update total price on cartActivity
-        cartActivity.updateTotalPrice();
+        cartActivity.updateCartTotal();
 
         // Remove the item from the database
         appDatabase.cartDao().deleteUserCartProduct(cartProductModel);
