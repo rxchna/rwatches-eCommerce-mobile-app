@@ -21,6 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView ivBackIconProd;
     ImageView ivCartIconProd;
+    ImageView ivHomeIconProd;
     ImageView ivProductImage;
     TextView tvProductName;
     TextView tvProdDescription;
@@ -50,6 +51,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         ivBackIconProd = findViewById(R.id.ivBackIconProd);
         ivCartIconProd = findViewById(R.id.ivCartIconProd);
+        ivHomeIconProd = findViewById(R.id.ivHomeIconProd);
         ivProductImage = findViewById(R.id.ivProductImage);
         tvProductName = findViewById(R.id.tvProductName);
         tvProdDescription = findViewById(R.id.tvProdDescription);
@@ -61,6 +63,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         ivBackIconProd.setOnClickListener(this);
         ivCartIconProd.setOnClickListener(this);
+        ivHomeIconProd.setOnClickListener(this);
         ivDecrementIcon.setOnClickListener(this);
         ivIncrementIcon.setOnClickListener(this);
         btnAddProductToCart.setOnClickListener(this);
@@ -80,17 +83,22 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         if (view.getId() == R.id.ivBackIconProd) {
             finish();
         } 
+        else if (view.getId() == R.id.ivHomeIconProd) {
+            Intent intentCart = new Intent(getApplicationContext(), ProductsActivity.class);
+            intentCart.putExtra("user_id", curr_userID);
+            startActivity(intentCart);
+        }
         else if (view.getId() == R.id.ivCartIconProd) {
             Intent intentCart = new Intent(getApplicationContext(), CartActivity.class);
             intentCart.putExtra("user_id", curr_userID);
             startActivity(intentCart);
-        } 
+        }
         else if (view.getId() == R.id.ivDecrementIcon) {
             if (prodQty >= 1) {
                 prodQty--;
                 tvCartProdQty.setText(String.valueOf(prodQty));
             }
-        } 
+        }
         else if (view.getId() == R.id.ivIncrementIcon) {
             prodQty++;
             tvCartProdQty.setText(String.valueOf(prodQty));
