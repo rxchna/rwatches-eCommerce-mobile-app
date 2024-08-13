@@ -1,6 +1,7 @@
 package com.example.rwatches_ecommerce_mobile_app;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,7 +52,16 @@ public class ProductsActivity extends AppCompatActivity {
 
         Log.d("ProductsActivity", "Products loaded size: " + productsList.size());
 
-        layoutManager = new LinearLayoutManager(this);
+        // Set the GridLayoutManager based on orientation
+        int orientation = getResources().getConfiguration().orientation;
+        GridLayoutManager layoutManager;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            layoutManager = new GridLayoutManager(this, 3); // 3 columns for landscape
+        } else {
+            layoutManager = new GridLayoutManager(this, 1); // 1 column for portrait
+        }
+
+//        layoutManager = new LinearLayoutManager(this);
         rvProductsList.setLayoutManager(layoutManager);
 
         productAdapter = new ProductAdapter(productsList, appDatabase, curr_userID);
