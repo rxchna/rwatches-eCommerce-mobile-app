@@ -2,6 +2,7 @@ package com.example.rwatches_ecommerce_mobile_app;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,11 +56,11 @@ public class ProductsActivity extends AppCompatActivity {
         // get orientation
         int orientation = getResources().getConfiguration().orientation;
 
-        // Get screen layout size
-        int screenSize = getResources().getConfiguration().screenLayout;
-        boolean isTablet = (getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+        // Get the smallest width in dp
+        int smallestWidthDp = Resources.getSystem().getConfiguration().smallestScreenWidthDp;
 
+        // Check if the device is a tablet based on smallest width
+        boolean isTablet = smallestWidthDp >= 800;
 
         // Set the GridLayoutManager based on orientation and screen size
         GridLayoutManager layoutManager;
@@ -89,9 +90,9 @@ public class ProductsActivity extends AppCompatActivity {
         ivUserProfileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), UserProfileActivity.class);
-//                intentCart.putExtra("user_id", curr_userID);
-//                startActivity(intent);
+                Intent intentUserProfile = new Intent(getApplicationContext(), UserProfileActivity.class);
+                intentUserProfile.putExtra("user_id", curr_userID);
+                startActivity(intentUserProfile);
             }
         });
     }

@@ -75,7 +75,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     clearCart(appDatabase, curr_userID);
 
                     // Notify user by email: order placed
-                    sendEmail(appDatabase, curr_userID); // TODO
+//                    sendEmail(appDatabase, curr_userID);
 
                     // Thank You page
                     Intent intentThankYou = new Intent(getApplicationContext(), ThankYouActivity.class);
