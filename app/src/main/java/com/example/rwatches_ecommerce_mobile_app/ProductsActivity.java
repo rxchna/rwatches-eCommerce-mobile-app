@@ -52,16 +52,25 @@ public class ProductsActivity extends AppCompatActivity {
 
         Log.d("ProductsActivity", "Products loaded size: " + productsList.size());
 
-        // Set the GridLayoutManager based on orientation
+        // get orientation
         int orientation = getResources().getConfiguration().orientation;
+
+        // Get screen layout size
+        int screenSize = getResources().getConfiguration().screenLayout;
+        boolean isTablet = (screenSize > Configuration.SCREENLAYOUT_SIZE_LARGE);
+
+        // Set the GridLayoutManager based on orientation and screen size
         GridLayoutManager layoutManager;
         if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
             layoutManager = new GridLayoutManager(this, 3); // 3 columns for landscape
         } else {
-            layoutManager = new GridLayoutManager(this, 1); // 1 column for portrait
+            if (isTablet) {
+                layoutManager = new GridLayoutManager(this, 2); // 2 columns for tablets in portrait
+            } else {
+                layoutManager = new GridLayoutManager(this, 1); // 1 column for phones in portrait
+            }
         }
 
-//        layoutManager = new LinearLayoutManager(this);
         rvProductsList.setLayoutManager(layoutManager);
 
         productAdapter = new ProductAdapter(productsList, appDatabase, curr_userID);
