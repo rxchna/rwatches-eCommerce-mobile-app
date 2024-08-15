@@ -17,6 +17,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.viewpager2.widget.ViewPager2;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ProductDetailActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView ivBackIconProd;
@@ -34,6 +38,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
     AppDatabase appDatabase;
     int prodQty = 0;
     int curr_userID;
+    ViewPager2 viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,6 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         ivBackIconProd = findViewById(R.id.ivBackIconProd);
         ivCartIconProd = findViewById(R.id.ivCartIconProd);
         ivHomeIconProd = findViewById(R.id.ivHomeIconProd);
-        ivProductImage = findViewById(R.id.ivProductImage);
         tvProductName = findViewById(R.id.tvProductName);
         tvProdDescription = findViewById(R.id.tvProdDescription);
         tvProductPrice = findViewById(R.id.tvProductPrice);
@@ -60,6 +64,7 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         ivDecrementIcon = findViewById(R.id.ivDecrementIcon);
         ivIncrementIcon = findViewById(R.id.ivIncrementIcon);
         btnAddProductToCart = findViewById(R.id.btnAddProductToCart);
+        viewPager = findViewById(R.id.viewPager);
 
         ivBackIconProd.setOnClickListener(this);
         ivCartIconProd.setOnClickListener(this);
@@ -74,8 +79,12 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         tvProductPrice.setText(String.format("%.2f", productModel.getProductPrice()));
         tvProdDescription.setText(productModel.getProductDescription());
         prodQty = Integer.parseInt(tvCartProdQty.getText().toString());
-        int resid = getApplicationContext().getResources().getIdentifier(productModel.getProductImageUrl(), "drawable", getApplicationContext().getPackageName());
-        ivProductImage.setImageResource(resid);
+
+        // Get product images list
+        List<String> imagesList = getImageUrls();
+
+        ProductImageAdapter adapter = new ProductImageAdapter(this, imagesList);
+        viewPager.setAdapter(adapter);
     }
     
     @Override
@@ -115,7 +124,6 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
         if (existingCartItem == null) {
             // Add new product to cart
             CartModel cartItem = new CartModel(curr_userID, productModel.getProductID(), prodQty);
-//        new Thread(() -> appDatabase.cartDao().insertUserCartProduct(cartItem)).start(); // TODO
             appDatabase.cartDao().insertUserCartProduct(cartItem);
         }
         else {
@@ -127,5 +135,14 @@ public class ProductDetailActivity extends AppCompatActivity implements View.OnC
 
         // Show Toast message
         Toast.makeText(this, "Product added to cart!", Toast.LENGTH_SHORT).show();
+    }
+
+    // Method to retrieve product images list
+    List<String> getImageUrls() {
+        // Retrieve and split the image URLs
+        String imageUrlString = productModel.getProductImagesList();
+
+        // Split string by ","
+        return Arrays.asList(imageUrlString.split(","));
     }
 }
