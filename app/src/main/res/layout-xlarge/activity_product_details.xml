@@ -61,16 +61,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <ImageView
-                    android:id="@+id/ivProductImage"
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="450dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/rose_gold_watch" />
+                    android:layout_marginTop="10dp" />
 
             </LinearLayout>
 

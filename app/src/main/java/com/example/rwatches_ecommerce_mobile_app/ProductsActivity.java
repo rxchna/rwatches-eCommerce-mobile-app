@@ -57,7 +57,9 @@ public class ProductsActivity extends AppCompatActivity {
 
         // Get screen layout size
         int screenSize = getResources().getConfiguration().screenLayout;
-        boolean isTablet = (screenSize > Configuration.SCREENLAYOUT_SIZE_LARGE);
+        boolean isTablet = (getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+
 
         // Set the GridLayoutManager based on orientation and screen size
         GridLayoutManager layoutManager;
@@ -106,35 +108,35 @@ public class ProductsActivity extends AppCompatActivity {
         if (prodCount == 0) {
             // Add products to db
             // Product 1
-            ProductModel product1 = new ProductModel(0, "MVMT Nova Orion Rose", "Glamorous rose gold meets bold titanium, a cosmic pairing. The 38mm Orion Rose channels an awe for the celestial with a future-forward design sensibility and dual timezone functionality.", "watch_orion_rose_1", 385.00);
+            ProductModel product1 = new ProductModel(0, "MVMT Nova Orion Rose", "Glamorous rose gold meets bold titanium, a cosmic pairing. The 38mm Orion Rose channels an awe for the celestial with a future-forward design sensibility and dual timezone functionality.", "watch_orion_rose_1", "watch_orion_rose_1,watch_orion_rose_2,watch_orion_rose_3", 385.00);
             appDatabase.productDao().insertProduct(product1);
 
             // Product 2
-            ProductModel product2 = new ProductModel(0, "MVMT Airhawk Stealth Black", "The 42mm Airhawk's clean dial reads easy and features multi-function sub dials for your timekeeping experience. The Stealth Black balances a black steel colorway with a pop of red on the second hand. ", "watch_matte_black_1", 415.00);
+            ProductModel product2 = new ProductModel(0, "MVMT Airhawk Stealth Black", "The 42mm Airhawk's clean dial reads easy and features multi-function sub dials for your timekeeping experience. The Stealth Black balances a black steel colorway with a pop of red on the second hand. ", "watch_matte_black_1", "watch_matte_black_1,watch_matte_black_2,watch_matte_black_3", 415.00);
             appDatabase.productDao().insertProduct(product2);
 
             // Product 3
-            ProductModel product3 = new ProductModel(0, "MVMT Avenue Chelsea Gold", "Inspired by the classic style of New York, the Avenue has a petite 28mm case and minimalist dial. The Chelsea Gold wears an all-over gold colorway. Its case material features yellow Gold ionic-plated stainless steel.", "watch_gold_1", 335.00);
+            ProductModel product3 = new ProductModel(0, "MVMT Avenue Chelsea Gold", "Inspired by the classic style of New York, the Avenue has a petite 28mm case and minimalist dial. The Chelsea Gold wears an all-over gold colorway. Its case material features yellow Gold ionic-plated stainless steel.", "watch_gold_1", "watch_gold_1,watch_gold_2,watch_gold_3", 335.00);
             appDatabase.productDao().insertProduct(product3);
 
             // Product 4
-            ProductModel product4 = new ProductModel(0, "MVMT International Waters", "As serene and mysterious as the open ocean. The International Waters features aquatic blues and silver steel tones. With a 36mm case made of hardened mineral crystal.", "watch_silver_blue_1", 371.50);
+            ProductModel product4 = new ProductModel(0, "MVMT International Waters", "As serene and mysterious as the open ocean. The International Waters features aquatic blues and silver steel tones. With a 36mm case made of hardened mineral crystal.", "watch_silver_blue_1", "watch_silver_blue_1,watch_silver_blue_2,watch_silver_blue_3", 371.50);
             appDatabase.productDao().insertProduct(product4);
 
             // Product 5
-            ProductModel product5 = new ProductModel(0, "MVMT Galaxy Midnight", "Run on spacetime in the Galaxy Midnight color story. Explore the starry golds of space and the vibrations of blue goldstone on the best selling Signature Square, a West Coast revamp of an iconic 90's square shape.", "watch_galaxy_midnight_1", 345.00);
+            ProductModel product5 = new ProductModel(0, "MVMT Galaxy Midnight", "Run on spacetime in the Galaxy Midnight color story. Explore the starry golds of space and the vibrations of blue goldstone on the best selling Signature Square, a West Coast revamp of an iconic 90's square shape.", "watch_galaxy_midnight_1", "watch_galaxy_midnight_1,watch_galaxy_midnight_2,watch_galaxy_midnight_3", 345.00);
             appDatabase.productDao().insertProduct(product5);
 
             // Product 6
-            ProductModel product6 = new ProductModel(0, "MVMT Voyager Bronze Age", "The Voyager Bronze Age's 42mm case is built for adventure, with 10 ATM water resistant technology and dual timezone functionality for any hour, any latitude. Featuring MVMT's Nordic design with pebbled sage grey leather and a muted bronze case.", "watch_bronze_1", 252.00);
+            ProductModel product6 = new ProductModel(0, "MVMT Voyager Bronze Age", "The Voyager Bronze Age's 42mm case is built for adventure, with 10 ATM water resistant technology and dual timezone functionality for any hour, any latitude. Featuring MVMT's Nordic design with pebbled sage grey leather and a muted bronze case.", "watch_bronze_1", "watch_bronze_1,watch_bronze_2,watch_bronze_3", 252.00);
             appDatabase.productDao().insertProduct(product6);
 
             // Product 7
-            ProductModel product7 = new ProductModel(0, "MVMT Raptor Electric Blue", "Our sleek and resistant self-winding Raptor features a Japanese Miyota 8250 automatic movement (open heart + exhibition case back), Waterproof guarantee (10 ATM + screw-down crown), Japanese super lume, and scratch resistant K1 crystal + shock resistance.", "watch_ceramic_blue_1", 560.00);
+            ProductModel product7 = new ProductModel(0, "MVMT Raptor Electric Blue", "Our sleek and resistant self-winding Raptor features a Japanese Miyota 8250 automatic movement (open heart + exhibition case back), Waterproof guarantee (10 ATM + screw-down crown), Japanese super lume, and scratch resistant K1 crystal + shock resistance.", "watch_ceramic_blue_1", "watch_ceramic_blue_1,watch_ceramic_blue_2,watch_ceramic_blue_3", 560.00);
             appDatabase.productDao().insertProduct(product7);
 
             // Product 8
-            ProductModel product8 = new ProductModel(0, "MVMT Ceramic Matte Green", "The California-clean Element Collection meets advanced ceramic technology. Featuring a Matte Green pigment, a finish so rich it could only be achieved by meticulously diamond-blasting our rare and resistant ceramic material.", "watch_matte_green_1", 425.50);
+            ProductModel product8 = new ProductModel(0, "MVMT Ceramic Matte Green", "The California-clean Element Collection meets advanced ceramic technology. Featuring a Matte Green pigment, a finish so rich it could only be achieved by meticulously diamond-blasting our rare and resistant ceramic material.", "watch_matte_green_1", "watch_matte_green_1,watch_matte_green_2,watch_matte_green_3", 425.50);
             appDatabase.productDao().insertProduct(product8);
         }
     }
