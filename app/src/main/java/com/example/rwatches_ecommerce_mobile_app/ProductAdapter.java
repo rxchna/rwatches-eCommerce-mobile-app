@@ -79,7 +79,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         if (existingCartItem == null) {
             // Add new product to cart
             CartModel cartItem = new CartModel(curr_userID, product.getProductID(), 1); // Default quantity to 1
-//        new Thread(() -> appDatabase.cartDao().insertUserCartProduct(cartItem)).start(); // TODO
             appDatabase.cartDao().insertUserCartProduct(cartItem);
         }
         else {

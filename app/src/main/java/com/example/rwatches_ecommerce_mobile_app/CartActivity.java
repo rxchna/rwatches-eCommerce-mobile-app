@@ -76,9 +76,9 @@ public class CartActivity extends AppCompatActivity {
         ivUserProfileIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intentUserProfile = new Intent(getApplicationContext(), MyProfileScreen.class);
-//                intentProducts.putExtra("user_id", curr_userID);
-//                startActivity(intentUserProfile); todo
+                Intent intentUserProfile = new Intent(getApplicationContext(), UserProfileActivity.class);
+                intentUserProfile.putExtra("user_id", curr_userID);
+                startActivity(intentUserProfile);
             }
         });
 
